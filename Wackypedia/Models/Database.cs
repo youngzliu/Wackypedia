@@ -1,8 +1,8 @@
 using System;
 using MySql.Data.MySqlClient;
-using WikiGoneWrong;
+using Wackypedia;
 
-namespace WikiGoneWrong.Models
+namespace Wackypedia.Models
 {
   public class DB
   {

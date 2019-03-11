@@ -2,7 +2,7 @@ using System;
 using System.Collection.Generic;
 using MySql.Data.MySqlClient;
 
-namespace WikiGoneWrong.Models
+namespace Wackypedia.Models
 {
   public class Article
   {

@@ -10,6 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WikiGoneWrong\WikiGoneWrong.csproj" />
+    <ProjectReference Include="..\Wackypedia\Wackypedia.csproj" />
   </ItemGroup>
 </Project>

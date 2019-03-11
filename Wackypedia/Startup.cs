@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WikiGoneWrong{
+namespace Wackypedia{
   public class Startup{
 
     public Startup(IHostingEnvironment env){
@@ -36,6 +36,6 @@ namespace WikiGoneWrong{
 
   public static class DBConfiguration
   {
-    public static string ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=wiki_gone_wrong;";
+    public static string ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=wackypedia;";
   }
 }

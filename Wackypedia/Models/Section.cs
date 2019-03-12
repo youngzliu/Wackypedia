@@ -1,5 +1,5 @@
 using System;
-using System.Collection.Generic;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace Wackypedia.Models
@@ -23,11 +23,11 @@ namespace Wackypedia.Models
     public string GetTitle(){ return MyTitle; }
     public string GetImageLink(){ return MyImageLink; }
     public string GetBody(){ return MyBody; }
-    public int GetArticleID() { return ArticleID; }
+    public int GetArticleID() { return MyArticleID; }
     public int GetID(){ return MyID; }
 
     public static List<Section> GetAll(){
-      List<Section> allSections = new List<Sections>();
+      List<Section> allSections = new List<Section>();
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;

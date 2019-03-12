@@ -1,5 +1,5 @@
 using System;
-using System.Collection.Generic;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace Wackypedia.Models

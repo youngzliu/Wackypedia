@@ -1,10 +1,9 @@
-using System;
-using System.Collection.Generic;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace Wackypedia.Models
 {
-  public class Article
+    public class Article
   {
     private string MyTitle;
     private int MyID;
@@ -103,44 +102,44 @@ namespace Wackypedia.Models
       }
     }
 
-    public override bool Equals(System.Object otherArticle){
-      if (!(otherArticle is Stylist))
-      {
-        return false;
-      }
-      else
-      {
-        Article newArticle = (Article) otherArticle;
-        bool articleEquality = (this.GetTitle() == newArticle.GetTitle() && this.GetID() == newArticle.GetID())
-        return (articleEquality);
-      }
-    }
+    //public override bool Equals(System.Object otherArticle){
+    //  if (!(otherArticle is Stylist))
+    //  {
+    //    return false;
+    //  }
+    //  else
+    //  {
+    //    Article newArticle = (Article) otherArticle;
+    //            bool articleEquality = (this.GetTitle() == newArticle.GetTitle() && this.GetID() == newArticle.GetID());
+    //    return (articleEquality);
+    //  }
+    //}
 
-    public static Stylist Find(int ID){
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM articles WHERE ID = @thisID;";
-      MySqlParameter thisID = new MySqlParameter();
-      thisID.ParameterName = "@thisID";
-      thisID.Value = ID;
-      cmd.Parameters.Add(thisID);
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      int articleID = 0;
-      string title = "";
-      while (rdr.Read())
-      {
-        articleID = rdr.GetInt32(0);
-        title = rdr.GetString(1);
-      }
-      Article foundArticle = new Article(title, articleID);
+    //public static Stylist Find(int ID){
+    //  MySqlConnection conn = DB.Connection();
+    //  conn.Open();
+    //  var cmd = conn.CreateCommand() as MySqlCommand;
+    //  cmd.CommandText = @"SELECT * FROM articles WHERE ID = @thisID;";
+    //  MySqlParameter thisID = new MySqlParameter();
+    //  thisID.ParameterName = "@thisID";
+    //  thisID.Value = ID;
+    //  cmd.Parameters.Add(thisID);
+    //  var rdr = cmd.ExecuteReader() as MySqlDataReader;
+    //  int articleID = 0;
+    //  string title = "";
+    //  while (rdr.Read())
+    //  {
+    //    articleID = rdr.GetInt32(0);
+    //    title = rdr.GetString(1);
+    //  }
+    //  Article foundArticle = new Article(title, articleID);
 
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return foundArticle;
-    }
+    //  conn.Close();
+    //  if (conn != null)
+    //  {
+    //    conn.Dispose();
+    //  }
+    //  return foundArticle;
+    //}
   }
 }

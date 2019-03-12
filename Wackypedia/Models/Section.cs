@@ -169,14 +169,14 @@ namespace Wackypedia.Models
         body = rdr.GetString(3); //This should be a TEXT field (MEDIUMTEXT/LONGTEXT)
         articleID = rdr.GetInt32(4);
       }
-      Section newSection = new Section(title, imageLink, body, articleID, sectionID);
+      Section foundSection = new Section(title, imageLink, body, articleID, sectionID);
 
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return newSection;
+      return foundSection;
     }
 
   }

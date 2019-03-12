@@ -6,7 +6,7 @@ namespace Wackypedia.Models
 {
   public class Author
   {
-
-
+    name
+    id
   }
 }

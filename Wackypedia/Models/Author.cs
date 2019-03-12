@@ -6,6 +6,10 @@ namespace Wackypedia.Models
 {
   public class Author
   {
+<<<<<<< HEAD
+    name
+    id
+=======
     private string MyName;
     private int MyID;
 
@@ -132,5 +136,6 @@ namespace Wackypedia.Models
         return (authorEquality);
       }
     }
+>>>>>>> 99ec29f7a20ced4cd23329edc885c4334b803b51
   }
 }

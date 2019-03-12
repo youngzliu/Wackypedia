@@ -6,6 +6,21 @@ namespace Wackypedia.Controllers
 {
     public class ArticlesController : Controller
     {
+        // article home page
+        [HttpGet("/articles")] 
+        public ActionResult Index()
+        {
+            List<Article> allArticles = Article.GetAll();
+            return View(allArticles);
+        }
+
+        [HttpGet("/articles/new")]
+        public ActionResult New()
+        {
+            return View();
+        }
+
+
         [HttpPost("/articles/search")]
         public ActionResult Search(string searchString)
         {
@@ -22,5 +37,7 @@ namespace Wackypedia.Controllers
             Article matchingArticle = new Article("Guess Who?!!");
             return View("Article", matchingArticle);
         }
+
+
     }
 }

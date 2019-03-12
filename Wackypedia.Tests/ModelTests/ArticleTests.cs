@@ -109,7 +109,7 @@ namespace Wackypedia.Tests
             expectedArticle.Save();
             Article actualArticle = Article.Find(expectedArticle.GetID());
 
-            actualArticle.Delete(expectedArticle.GetID());
+            actualArticle.Delete();
 
             // Assert
             Article deletedArticle = Article.Find(expectedArticle.GetID());

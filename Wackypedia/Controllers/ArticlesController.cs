@@ -48,7 +48,7 @@ namespace Wackypedia.Controllers
 			List<Section> articleSections = selectedArticle.GetSections();
 			List<Author> articleAuthors = selectedArticle.GetAuthor();
 			model.Add("stylist", selectedArticle);
-			model.Add("sections", articleSections)
+            model.Add("sections", articleSections);
 			model.Add("authors", articleAuthors);
 			return View("Index", model);
 		}

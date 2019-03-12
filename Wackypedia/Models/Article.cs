@@ -198,7 +198,7 @@ namespace Wackypedia.Models
       }
       else
       {
-        Article newArticle = (Stylist) otherArticle;
+        Article newArticle = (Article) otherArticle;
         bool articleEquality = (this.GetTitle() == newArticle.GetTitle() && this.GetID() == newArticle.GetID());
         return (articleEquality);
       }
@@ -231,6 +231,11 @@ namespace Wackypedia.Models
       return foundArticle;
     }
 
+        public override int GetHashCode()
+        {
+            return GetID().GetHashCode();
+        }
 
-  }
+
+    }
 }

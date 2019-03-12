@@ -6,14 +6,16 @@ namespace Wackypedia.Models
 {
   public class Author
   {
-<<<<<<< HEAD
-    name
-    id
-=======
+
     private string MyName;
     private int MyID;
 
-
+    public Author(string name, int id = 0)
+        {
+            MyName = name;
+            MyID = id;
+        }
+        
     public string GetName(){ return MyName; }
     public int GetID(){ return MyID; }
 
@@ -44,9 +46,9 @@ namespace Wackypedia.Models
       article_ID.Value = newArticle.GetID();
       cmd.Parameters.Add(article_ID);
       MySqlParameter author_ID = new MySqlParameter();
-      authorID.ParameterName = "@authorID";
+      author_ID.ParameterName = "@authorID";
       author_ID.Value = MyID;
-      cmd.Parameters.Add(author_ID;
+      cmd.Parameters.Add(author_ID);
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
@@ -112,7 +114,7 @@ namespace Wackypedia.Models
         int ID = rdr.GetInt32(0);
         string name = rdr.GetString(1);
         Author newAuthor = new Author(name, ID);
-        allAuthors.Add(newAuthor;
+        allAuthors.Add(newAuthor);
       }
 
       conn.Close();
@@ -136,6 +138,5 @@ namespace Wackypedia.Models
         return (authorEquality);
       }
     }
->>>>>>> 99ec29f7a20ced4cd23329edc885c4334b803b51
   }
 }

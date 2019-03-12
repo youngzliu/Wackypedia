@@ -1,10 +1,10 @@
 div.container {
-    bottom:0px;
-    left:0px;
-    width:100%;
-    color:#CCC;
-    background:#333;
-    padding:8px;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    color: #EEE;
+    background: #6F90D8;
+    padding: 8px;
 }
 
 h1 {
@@ -22,4 +22,8 @@ div#searchBar div {
 
 div#searchBar div input {
     width: 500px;
+}
+
+.button {
+    color: #000000;
 }

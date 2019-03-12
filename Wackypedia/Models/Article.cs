@@ -70,11 +70,52 @@ namespace Wackypedia.Models
 
     public void SetTitle(string title){ MyTitle = title; }
 
+    public void AddAuthor(Author newAuthor)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO articles_authors (article_ID, author_ID) VALUES (@articleID, @authorID);";
+      MySqlParameter articleID = new MySqlParameter();
+      articleID.ParameterName = "@articleID";
+      articleID.Value = MyID;
+      cmd.Parameters.Add(articleID);
+      MySqlParameter authorID = new MySqlParameter();
+      authorID.ParameterName = "@authorID";
+      authorID.Value = newAuthor.GetID();
+      cmd.Parameters.Add(authorID);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    //This method will DELETE EVERYTHING. ALL models.
     public static void ClearAll(){
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM articles;";
+      cmd.CommandText = @"DELETE FROM articles; DELETE FROM articles_authors";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      Section.ClearAll();
+    }
+
+    public void Delete(){
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM articles WHERE ID = @thisID; DELETE FROM sections WHERE articleID = @thisID; DELETE from articles_authors WHERE article_ID = @thisID;";
+      MySqlParameter thisID = new MySqlParameter();
+      thisID.ParameterName = "@thisID";
+      thisID.Value = this.MyID;
+      cmd.Parameters.Add(thisID);
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
@@ -102,44 +143,94 @@ namespace Wackypedia.Models
       }
     }
 
-    //public override bool Equals(System.Object otherArticle){
-    //  if (!(otherArticle is Stylist))
-    //  {
-    //    return false;
-    //  }
-    //  else
-    //  {
-    //    Article newArticle = (Article) otherArticle;
-    //            bool articleEquality = (this.GetTitle() == newArticle.GetTitle() && this.GetID() == newArticle.GetID());
-    //    return (articleEquality);
-    //  }
-    //}
+    public List<Author> GetAuthor(){
+      List<Author> allAuthors = new List<Author>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT authors.* FROM articles JOIN articles_authors ON (articles.ID = articles_authors.article_ID) JOIN authors ON (articles_authors.author_ID = authors.ID) WHERE articles.ID = (@articleID);";
+      MySqlParameter articleID = new MySqlParameter();
+      articleID.ParameterName = "@articleID";
+      articleID.Value = MyID;
+      cmd.Parameters.Add(articleID);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int authorID = rdr.GetInt32(0);
+        string name = rdr.GetString(1);
+        Author newAuthor = new Author(name, authorID);
+        allAuthors.Add(newAuthor);
+      }
+      conn.Close();
+      if(conn!=null)
+      {
+        conn.Dispose();
+      }
+      return allAuthors;
+    }
 
-    //public static Stylist Find(int ID){
-    //  MySqlConnection conn = DB.Connection();
-    //  conn.Open();
-    //  var cmd = conn.CreateCommand() as MySqlCommand;
-    //  cmd.CommandText = @"SELECT * FROM articles WHERE ID = @thisID;";
-    //  MySqlParameter thisID = new MySqlParameter();
-    //  thisID.ParameterName = "@thisID";
-    //  thisID.Value = ID;
-    //  cmd.Parameters.Add(thisID);
-    //  var rdr = cmd.ExecuteReader() as MySqlDataReader;
-    //  int articleID = 0;
-    //  string title = "";
-    //  while (rdr.Read())
-    //  {
-    //    articleID = rdr.GetInt32(0);
-    //    title = rdr.GetString(1);
-    //  }
-    //  Article foundArticle = new Article(title, articleID);
+    public void Edit(string newTitle){
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE stylists SET title = @title WHERE ID = @searchID;";
+      MySqlParameter searchID = new MySqlParameter();
+      searchID.ParameterName = "@searchID";
+      searchID.Value = MyID;
+      cmd.Parameters.Add(searchID);
+      MySqlParameter title = new MySqlParameter();
+      title.ParameterName = "@title";
+      title.Value = newTitle;
+      cmd.Parameters.Add(title);
+      cmd.ExecuteNonQuery();
+      MyTitle = newTitle;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
 
-    //  conn.Close();
-    //  if (conn != null)
-    //  {
-    //    conn.Dispose();
-    //  }
-    //  return foundArticle;
-    //}
+    public override bool Equals(System.Object otherArticle){
+      if (!(otherArticle is Article))
+      {
+        return false;
+      }
+      else
+      {
+        Article newArticle = (Stylist) otherArticle;
+        bool articleEquality = (this.GetTitle() == newArticle.GetTitle() && this.GetID() == newArticle.GetID());
+        return (articleEquality);
+      }
+    }
+
+    public static Article Find(int id){
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM articles WHERE ID = @thisID;";
+      MySqlParameter thisID = new MySqlParameter();
+      thisID.ParameterName = "@thisID";
+      thisID.Value = id;
+      cmd.Parameters.Add(thisID);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int articleID = 0;
+      string title = "";
+      while (rdr.Read())
+      {
+        articleID = rdr.GetInt32(0);
+        title = rdr.GetString(1);
+      }
+      Article foundArticle = new Article(title, articleID);
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return foundArticle;
+    }
+
+
   }
 }

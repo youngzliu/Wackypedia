@@ -13,8 +13,14 @@ namespace Wackypedia.Models
       MyID = ID;
     }
 
-    public string GetTitle(){ return MyTitle; }
-    public int GetID(){ return MyID; }
+    public string GetTitle()
+    { 
+      return MyTitle; 
+    }
+    public int GetID()
+    { 
+      return MyID; 
+    }
 
     public List<Section> GetSections(){
       List<Section> allArticleSections = new List<Section>();

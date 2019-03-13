@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Wackypedia.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 
 namespace Wackypedia.Tests
 {
@@ -18,7 +19,7 @@ namespace Wackypedia.Tests
         public void GetTitle_ReturnsTheExpectedArticleTitle()
         {
             //Arrange
-            Article article = new Article("Article1");
+            Article article = new Article("Article1", "AnyContent");
 
             //Act
             string newTitle = article.GetTitle();
@@ -31,10 +32,10 @@ namespace Wackypedia.Tests
         public void GetId_ReturnsTheExpectedArticleId()
         {
             //Arrange
-            Article article = new Article("Article2", 1);
+            Article article = new Article("Article2", "AnyContent", 1);
 
             //Act
-            int articleId = article.GetID();
+            int articleId = article.GetId();
 
             //Assert
             Assert.AreEqual(1, articleId);
@@ -55,7 +56,7 @@ namespace Wackypedia.Tests
         public void GetAll_ReturnsAllArticlesInTheDatabase()
         {
             //Arrange
-            Article anyArticle = new Article("Article3");
+            Article anyArticle = new Article("Article3", "AnyContent");
 
             //Act
             anyArticle.Save();
@@ -72,7 +73,7 @@ namespace Wackypedia.Tests
         {
             //Arrange
             string articleTitle = "Article4";
-            Article article = new Article(articleTitle);
+            Article article = new Article(articleTitle, "AnyContent");
 
             //Act
             article.Save();
@@ -88,11 +89,11 @@ namespace Wackypedia.Tests
         {
             //Arrange
             string articleTitle = "Article5";
-            Article expectedArticle = new Article(articleTitle);
+            Article expectedArticle = new Article(articleTitle, "AnyContent");
 
             //Act
             expectedArticle.Save();
-            Article actualArticle = Article.Find(expectedArticle.GetID());
+            Article actualArticle = Article.Find(expectedArticle.GetId());
 
             // Assert
             Assert.IsNotNull(actualArticle);
@@ -103,17 +104,62 @@ namespace Wackypedia.Tests
         {
             //Arrange
             string articleTitle = "Article6";
-            Article expectedArticle = new Article(articleTitle);
+            Article expectedArticle = new Article(articleTitle, "AnyContent");
 
             //Act
             expectedArticle.Save();
-            Article actualArticle = Article.Find(expectedArticle.GetID());
+            Article actualArticle = Article.Find(expectedArticle.GetId());
 
             actualArticle.Delete();
 
             // Assert
-            Article deletedArticle = Article.Find(expectedArticle.GetID());
+            Article deletedArticle = Article.Find(expectedArticle.GetId());
             Assert.IsNull(deletedArticle);
+        }
+
+        [TestMethod]
+        public void GetSections_ParsesExpectedSectionsFromASetOfText()
+        {
+            string exampleContent =
+                @"==Section 1==
+                  This is the content of section 1
+                   
+                  ==Section 2==
+                  This is the content of section 2
+
+                  == Section 3 ==
+                  This is the content of section 3
+
+                  ==      Section 4            ==
+                  This is the content of section 4
+
+                  == Section 5  == This is the content of section 5";
+
+            Article article = new Article("AnyTitle", exampleContent);
+            List<Section> articleSections = article.GetSections();
+
+            Assert.IsTrue(articleSections.Count == 5);
+            CollectionAssert.AreEqual(
+                new List<string>
+                {
+                    "Section 1",
+                    "Section 2",
+                    "Section 3",
+                    "Section 4",
+                    "Section 5"
+                },
+                articleSections.Select(section => section.GetTitle()).ToArray());
+
+            CollectionAssert.AreEqual(
+                new List<string>
+                {
+                    "This is the content of section 1",
+                    "This is the content of section 2",
+                    "This is the content of section 3",
+                    "This is the content of section 4",
+                    "This is the content of section 5"
+                },
+                articleSections.Select(section => section.GetContent()).ToArray());
         }
     }
 }

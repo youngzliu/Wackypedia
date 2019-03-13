@@ -1,4 +1,4 @@
-# Hair Salon
+# Wackypedia
 
 By 
 Theary, Young, Florin and Tristan 03/12/19
@@ -78,7 +78,7 @@ Repeat for wackypedia_test.
 |   Behavior                          | Input Example | Output Example |
 | ------------------------------------|:-------------:| :-------------:|
 | User clicks Add new Article         | Click Add new article | Article form |
-| User enters and submits artcile     | Submit |  |
+| User enters and submits article  | Submit |  |
 | User types in section | 
 | User searches for article
 

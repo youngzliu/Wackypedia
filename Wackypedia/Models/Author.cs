@@ -131,6 +131,33 @@ namespace Wackypedia.Models
             return allAuthors;
         }
 
+        public static Author Find(int id){
+          MySqlConnection conn = DB.Connection();
+          conn.Open();
+          var cmd = conn.CreateCommand() as MySqlCommand;
+          cmd.CommandText = @"SELECT * FROM authors WHERE ID = @thisID;";
+          MySqlParameter thisID = new MySqlParameter();
+          thisID.ParameterName = "@thisID";
+          thisID.Value = MyID;
+          cmd.Parameters.Add(thisID);
+          var rdr = cmd.ExecuteReader() as MySqlDataReader;
+          int authorID = 0;
+          string name = "";
+          while (rdr.Read())
+          {
+            authorID = rdr.GetInt32(0);
+            name = rdr.GetString(1);
+          }
+          Author foundAuthor = new Author(name, authorID);
+
+          conn.Close();
+          if (conn != null)
+          {
+            conn.Dispose();
+          }
+          return foundAuthor;
+      }
+
         public override bool Equals(System.Object otherAuthor)
         {
             if (!(otherAuthor is Author))

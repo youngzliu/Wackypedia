@@ -37,14 +37,14 @@ namespace Wackypedia.Models
         {
             // In this logic, sections are divided using a
             // '==' character similar to the way wikis are.
-            // We can divide the content into 'sections' by 
+            // We can divide the content into 'sections' by
             // parsing on the word that begin and end with the '=='
             // section markup.
-            // 
+            //
             // Example
             // ==Section 1==
             // Section 1 text here
-            // 
+            //
             // ==Section 2==
             // Section 2 text here
             //

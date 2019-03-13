@@ -138,7 +138,7 @@ namespace Wackypedia.Models
           cmd.CommandText = @"SELECT * FROM authors WHERE ID = @thisID;";
           MySqlParameter thisID = new MySqlParameter();
           thisID.ParameterName = "@thisID";
-          thisID.Value = MyID;
+          thisID.Value = id;
           cmd.Parameters.Add(thisID);
           var rdr = cmd.ExecuteReader() as MySqlDataReader;
           int authorID = 0;

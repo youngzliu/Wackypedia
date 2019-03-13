@@ -8,7 +8,7 @@ namespace Wackypedia.Controllers
 	public class ArticlesController : Controller
 	{
 		// article home page
-		[HttpGet("/articles")] 
+		[HttpGet("/articles")]
 		public ActionResult Index()
 		{
 			List<Article> allArticles = Article.GetAll();
@@ -19,7 +19,7 @@ namespace Wackypedia.Controllers
         [HttpGet("/articles/show")]
         public ActionResult ShowArticle()
         {
-            string content = 
+            string content =
                 "==Section 1==\r\n" +
                 "This is the content of section 1\r\n\r\n" +
                  "==Section 2==\r\n" +
@@ -50,14 +50,18 @@ namespace Wackypedia.Controllers
             // Article article = Article.Find(id);
             // article.SetContent(editedContent);
             // article.Save();
-
-            return RedirectToAction("ShowArticle");
+						Dictionary<string, object> model = new Dictionary<string, object>();
+						Article article = new Article(
+                "This is an article title",
+                editedContent, 1);
+            model.Add("article", article);
+            return View("Article-show", model);
         }
 
-        [HttpGet("/articles/new")]
+    [HttpGet("/articles/new")]
 		public ActionResult New()
 		{
-			return View();
+			return View("Article-New");
 		}
 
 		[HttpPost("/articles")]

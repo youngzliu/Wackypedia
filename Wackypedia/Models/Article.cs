@@ -10,9 +10,11 @@ namespace Wackypedia.Models
         private string _title;
         private string _content;
         private int _id;
+        private static int _lastArticleId = 0;
+        private static string placeholder = "==Section 1==\r\n" + "This is the content of section 1\r\n\r\n" + "==Section 2==\r\n" + "This is the content of section 2\r\n\r\n" + "== Section 3 ==\r\n" + "This is the content of section 3\r\n\r\n" + "==      Section 4            ==\r\n" + "This is the content of section 4\r\n\r\n" + "== Section 5  == This is the content of section 5";
 
 
-        public Article(string title, string content, int id = 0 )
+        public Article(string title, string content = placeholder, int id = 0 )
         {
             _title = title;
             _content = content;
@@ -22,6 +24,7 @@ namespace Wackypedia.Models
         public string GetTitle() { return _title; }
         public string GetContent() { return _content;  }
         public int GetId() { return _id; }
+        public static Article GetLastArticle(int id){ return Article.Find(_lastArticleId); }
 
         public void SetContent(string content)
         {
@@ -209,6 +212,7 @@ namespace Wackypedia.Models
             cmd.Parameters.Add(title);
             cmd.ExecuteNonQuery();
             _id = (int)cmd.LastInsertedId;
+            _lastArticleId = this._id;
 
             conn.Close();
             if (conn != null)

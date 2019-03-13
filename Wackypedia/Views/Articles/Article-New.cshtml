@@ -1,7 +1,9 @@
-@if (@Model != null)
-{
-    <p>@Model.GetTitle()</p>
+@{
+    Layout = "_Layout";
 }
+
+@Html.Partial("_Header")
+@using Wackypedia.models;
 
 <h1>Add a Article Below</h1>
 <div id="section" class="panel panel-info">
@@ -11,23 +13,8 @@
 </div>
 
 <form action="/articles" method="post">
-    <label for="articleDescription">Subject:</label>
-    <input id="articleDescription" name="articleDescription" type="text" value="" rows="2" cols="10"> </br>
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text" value="" rows="2" cols="10"> </br>
 
-    <label for="">Section 1</label>
-    <textarea name="" rows="5" cols="150">i.e. background
-            </textarea>
 
-    <label for="">Section 2</label>
-    <textarea name="" rows="5" cols="150">i.e. The cat was playing in the garden.
-            </textarea>
-
-    <label for="">Author Information</label>
-        <textarea name="" rows="5" cols="150">i.e. name/email address
-            </textarea>
-
-        <button type="submit">Add</button>
  </form>
-
-<p><a href="/">Return home</a></p>
-<p><a href="/articles">Back to view articles</a></p>

@@ -3,7 +3,7 @@
 }
 
 @Html.Partial("_Header")
-@using Wackypedia.models;
+@using Wackypedia.Models;
 
 <h1>Add a Article Below</h1>
 <div id="section" class="panel panel-info">
@@ -12,9 +12,12 @@
     </div>
 </div>
 
-<form action="/articles" method="post">
+<form action="/articles" method="post" style="width:100%;height:100%;">
     <label for="title">Title</label>
-    <input id="title" name="title" type="text" value="" rows="2" cols="10"> </br>
-
-
+    <br>
+    <input class = "form-control" id="title" name="title" type="text" value="" rows="2" cols="10"> </br>
+    <br>
+    <textarea class="form-control" id="editedContent" name="editedContent" rows="30" style="width:100%;height:100%;">@Article.GetPlaceholder()</textarea>
+    <br>
+    <button type="submit" class="btn btn-success">Add</button>
  </form>

@@ -65,12 +65,13 @@ namespace Wackypedia.Controllers
 		}
 
 		[HttpPost("/articles")]
-		public ActionResult Create(string articleDescription)
+		public ActionResult Create(string title, string editedContent)
 		{
-			Article newArticle = new Article("AnyOldTitle", articleDescription);
+			Article newArticle = new Article(title, editedContent);
 			newArticle.Save();
-			List<Article> allArticles = Article.GetAll();
-			return View("Index", allArticles);
+			Dictionary<string, object> model = new Dictionary<string, object>();
+			model.Add("article", newArticle);
+			return View("Article-Show", model);
 		}
 
 

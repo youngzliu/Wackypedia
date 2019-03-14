@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+@Html.Partial("_Header")
+@using Wackypedia.Models;
+
+<h2>Article: @Model["article"].GetTitle() Edit section @Model["section"].GetTitle()</h2>
+<form action="/articles/@Model["article"].GetID()/sections/@Model["section"].GetID()" method="post">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <textarea id="title" name="title" type="text" rows="3" class="form-control" required>@Model["section"].GetTitle()</textarea>
+  </div>
+  <div class="form-group">
+    <label for="imageLink">Image Link:</label>
+    <textarea id="imageLink" name="imageLink" type="text" rows="3" class="form-control" required>@Model["section"].GetImageLink()</textarea>
+  </div>
+  <div class="form-group">
+    <label for="body">Body Text:</label>
+    <textarea id="body" name="body" type="text" rows="10" class="form-control" required>@Model["section"].GetBody()</textarea>
+  </div>
+  <div class="form-group">
+    <label for="author">Name of contributor:</label>
+    <input id="author" name="author" type="text" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-info">Edit:</button>
+</form>

@@ -9,7 +9,7 @@ namespace Wackypedia.Models
     private string MyName;
     private int MyID;
 
-    public Author(string name = " ", int id = 0)
+    public Author(string name, int id = 0)
     {
       MyName = name;
       MyID = id;

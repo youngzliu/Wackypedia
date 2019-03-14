@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+@Html.Partial("_Header")
+
+<h1>Fill in the information for an article:</h1>
+<form action="/articles" method="post">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input id="title" name="title" type="text" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="author">Contributor's Name:</label>
+    <input id="author" name="author" type="text" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-info">Go!</button>
+</form>

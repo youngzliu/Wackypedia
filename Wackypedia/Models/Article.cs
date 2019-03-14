@@ -8,7 +8,7 @@ namespace Wackypedia.Models
     private string MyTitle;
     private int MyID;
 
-    public Article(string title = " ", int ID = 0){
+    public Article(string title, int ID = 0){
       MyTitle = title;
       MyID = ID;
     }
@@ -143,7 +143,7 @@ namespace Wackypedia.Models
       }
     }
 
-    public List<Author> GetAuthor(){
+    public List<Author> GetAuthors(){
       List<Author> allAuthors = new List<Author>{};
       MySqlConnection conn = DB.Connection();
       conn.Open();

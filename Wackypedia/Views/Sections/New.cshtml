@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+@Html.Partial("_Header")
+@using Wackypedia.Models;
+
+<h1>Add a new section to @Model.GetTitle()</h1>
+<form action='/articles/@Model.GetID()/sections' method='post'>
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input id="title" name="title" type="text" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="imageLink">Image link (type "empty" if you dont want an image):</label>
+    <input id="imageLink" name="imageLink" type="text" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="body">Text body:</label>
+    <input id="body" name="body" type="text" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="author">Contributor name:</label>
+    <input id="author" name="author" type="text" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-info">Go!</button>
+</form>

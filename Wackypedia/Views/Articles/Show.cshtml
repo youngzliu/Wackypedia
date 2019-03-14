@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+@Html.Partial("_Header")
+@using Wackypedia.Models;
+<h1>@Model["article"].GetTitle()</h1>
+<hr color="grey">
+
+@if(Model["sections"].Count != 0)
+{
+  @foreach (Section sec in Model["sections"])
+  {
+    <h2 class="inline">@sec.GetTitle()</h2><a href="/articles/@Model["article"].GetID()/sections/@sec.GetID()/edit" class="inline">Edit</a>
+    <hr color="grey">
+    @if(sec.GetImageLink() != "empty")
+    {
+      <img src="@sec.GetImageLink()">
+    }
+    <p>@sec.GetBody()</p>
+    <hr color="grey">
+  }
+}
+<a href="/articles/@Model["article"].GetID()/sections/new" class="btn btn-success">Add a section:</a>
+<h3>Contributors to this article:</h3>
+@foreach (Author author in Model["authors"])
+{
+  <span class="btn btn-info">@author.GetName()</span>
+}

@@ -5,11 +5,11 @@ html, body {
 }
 
 div.container {
-    bottom: 0px;
-    left: 0px;
-    width: 100%;
+    /* bottom: 0px;
+    left: 0px; */
+    /* width: 100%; */
     color: #EEE;
-    padding: 8px;
+    margin: 5px;
 }
 
 h1.centered {
@@ -25,6 +25,7 @@ div#contentEdit {
 
 .navbar{
   border-radius: 20px;
+  margin-bottom: 20px;
 }
 
 .nav-item, .navbar-brand{
@@ -35,8 +36,9 @@ div#contentEdit {
 }
 
 .navbar-brand{
-  border-style: solid;
-  border-color: white;
-  border-radius: 15px;
   padding: 5px;
+}
+
+.inline{
+  display: inline-block;
 }

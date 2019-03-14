@@ -1,0 +1,13 @@
+@{
+    Layout = "_Layout";
+}
+@Html.Partial("_Header")
+@using Wackypedia.Models;
+
+<h1>Articles that @Model["author"].GetName() has contributed to:</h1>
+<ul>
+  @foreach (Article article in Model["articles"])
+  {
+    <li><strong><a href='/articles/@article.GetID()'>@article.GetTitle()</a></strong></li>
+  }
+</ul>

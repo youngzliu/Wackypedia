@@ -37,5 +37,23 @@ namespace Wackypedia.Controllers
       model.Add("authors", articleAuthors);
       return View(model);
     }
+
+		[HttpGet("/articles/{articleID}/edit")]
+    public ActionResult Edit(int articleID)
+    {
+      Article article = Article.Find(articleID);
+      return View(article);
+    }
+
+		[HttpPost("/articles/{artID}")]
+    public ActionResult Update(int artID, string title, string author)
+    {
+      Article article = Article.Find(artID);
+      article.Edit(title);
+      Author au = new Author(author);
+			au.Save();
+			au.AddArticle(Article.Find(artID));
+      return RedirectToAction("Show", new {articleID = artID});
+    }
 	}
 }

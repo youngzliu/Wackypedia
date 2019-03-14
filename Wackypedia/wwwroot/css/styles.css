@@ -1,6 +1,7 @@
 html, body {
     margin-left:30px;
     margin-right:30px;
+    background-color: black;
 }
 
 div.container {
@@ -8,11 +9,10 @@ div.container {
     left: 0px;
     width: 100%;
     color: #EEE;
-    background: #6F90D8;
     padding: 8px;
 }
 
-h1 {
+h1.centered {
     text-align: center;
 }
 
@@ -23,19 +23,20 @@ div#contentEdit {
     display: none;
 }
 
-div#searchBar {
-    width: 100%;
+.navbar{
+  border-radius: 20px;
 }
 
-div#searchBar div {
-    float: right;
-    width: 100%;
+.nav-item, .navbar-brand{
+  border-style: solid;
+  border-color: white;
+  border-radius: 10px;
+  margin: 5px;
 }
 
-div#searchBar div input {
-    width: 500px;
-}
-
-.button {
-    color: #000000;
+.navbar-brand{
+  border-style: solid;
+  border-color: white;
+  border-radius: 15px;
+  padding: 5px;
 }

@@ -1,18 +1,23 @@
-﻿<div class="container">
-    <h1>Wackypedia</h1>
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li role="presentation" class="active"><a href="#">View All Articles</a></li>
-        <li role="presentation" class="active"><a href="/articles/new">Add New Article</a></li>
-        <li>
-            <div id="searchBar">
-                <div>
-                    <form action="/articles/search" method="post">
-                        <input id="searchString" type="text" name="searchString" />
-                        <button style="color: #424242">Search</button>
-                    </form>
-                </div>
-            </div>
+
+  <h1 class="centered">Wackypedia</h1>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">View All Articles</a>
         </li>
-    </ul>
-</div>
+        <li class="nav-item active">
+          <a class="nav-link" href="/articles/new">Add New Article</a>
+        </li>
+      </ul>
+      <form class="form-inline" action="/articles/search">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>

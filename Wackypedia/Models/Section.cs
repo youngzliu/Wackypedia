@@ -12,7 +12,7 @@ namespace Wackypedia.Models
     private int MyArticleID;
     private int MyID;
 
-    public Section(string title, string imageLink, string body, int articleID, int ID = 0){
+    public Section(string title = " ", string imageLink = " ", string body = " ", int articleID = 0, int ID = 0){
       MyTitle = title;
       MyImageLink = imageLink;
       MyBody = body;

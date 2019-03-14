@@ -8,7 +8,7 @@ namespace Wackypedia.Models
     private string MyTitle;
     private int MyID;
 
-    public Article(string title, int ID = 0){
+    public Article(string title = " ", int ID = 0){
       MyTitle = title;
       MyID = ID;
     }

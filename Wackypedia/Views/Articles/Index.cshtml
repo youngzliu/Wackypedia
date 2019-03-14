@@ -4,15 +4,28 @@
 @Html.Partial("_Header")
 @using Wackypedia.Models;
 <h1>All Articles:</h1>
-<ul>
-  @if (Model.Count == 0){
-    <p>There are no articles currently!</p>
-  }
-  else
+
+@if (Model.Count == 0){
+  <p>There are no articles currently!</p>
+}
+else
+{
+  @foreach (Article article in Model)
   {
-    @foreach (Article article in Model)
-    {
-      <li><strong><a href='/articles/@article.GetID()'>@article.GetTitle()</a></strong></li>
-    }
+    <a href="/articles/@article.GetID()" class="card text-white bg-secondary mb-2">
+      <div class="card-header">@article.GetTitle()</div>
+      @if(article.GetSections().Count > 0){
+        @if(article.GetSections()[0].GetBody().Length < 100){
+            <div class="card-body">
+              <p class="card-text">@article.GetSections()[0].GetBody()</p>
+            </div>
+        }
+        else{
+          <div class="card-body">
+            <p class="card-text">@article.GetSections()[0].GetBody().Substring(0, 100) ......</p>
+          </div>
+        }
+      }
+    </a>
   }
-</ul>
+}

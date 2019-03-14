@@ -68,6 +68,35 @@ namespace Wackypedia.Models
       return allArticles;
     }
 
+    public static List<Article> Search(string title) {
+      List<Article> searchedArticles = new List<Article>();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM articles WHERE title LIKE @title;";
+      // cmd.CommandText = @"SELECT * FROM articles WHERE title = @title;";
+      MySqlParameter searchTitle = new MySqlParameter();
+      searchTitle.ParameterName = "@title";
+      searchTitle.Value = "%" + title + "%";
+      cmd.Parameters.Add(searchTitle);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      while(rdr.Read()){
+        int articleID = rdr.GetInt32(0);
+        string newTitle = rdr.GetString(1);
+        Article newArticle = new Article(newTitle, articleID);
+        searchedArticles.Add(newArticle);
+      }
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+
+      return searchedArticles;
+    }
+
     public void SetTitle(string title){ MyTitle = title; }
 
     public void AddAuthor(Author newAuthor)

@@ -5,9 +5,22 @@
 @using Wackypedia.Models;
 
 <h1>Articles that @Model["author"].GetName() has contributed to:</h1>
-<ul>
-  @foreach (Article article in Model["articles"])
-  {
-    <li><strong><a href='/articles/@article.GetID()'>@article.GetTitle()</a></strong></li>
-  }
-</ul>
+
+@foreach (Article article in Model["articles"])
+{
+  <a href="/articles/@article.GetID()" class="card text-white bg-secondary mb-2">
+    <div class="card-header">@article.GetTitle()</div>
+    @if(article.GetSections().Count > 0){
+      @if(article.GetSections()[0].GetBody().Length < 100){
+          <div class="card-body">
+            <p class="card-text">@article.GetSections()[0].GetBody()</p>
+          </div>
+      }
+      else{
+        <div class="card-body">
+          <p class="card-text">@article.GetSections()[0].GetBody().Substring(0, 100) ......</p>
+        </div>
+      }
+    }
+  </a>
+}

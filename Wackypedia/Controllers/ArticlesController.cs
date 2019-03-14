@@ -55,5 +55,12 @@ namespace Wackypedia.Controllers
 			au.AddArticle(Article.Find(artID));
       return RedirectToAction("Show", new {articleID = artID});
     }
+
+		[HttpPost("/articles/search")]
+		public ActionResult Search(string title)
+		{
+			List<Article> searchedArticles = Article.Search(title);
+			return View(searchedArticles);
+		}
 	}
 }

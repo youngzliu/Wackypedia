@@ -164,5 +164,15 @@ namespace Wackypedia.Models
           }
           return foundAuthor;
     }
+
+    public static Author Find(string name){
+      List<Author> allAuthors = Author.GetAll();
+      foreach (Author author in allAuthors){
+        if(author.GetName().Trim().ToLower() == name.Trim().ToLower()){
+          return author;
+        }
+      }
+      return null;
+    }
   }
 }

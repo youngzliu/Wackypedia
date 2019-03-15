@@ -19,9 +19,15 @@ namespace Wackypedia.Controllers
     public ActionResult Create(string title, string author){
       Article article = new Article(title);
       article.Save();
-			Author newAuthor = new Author(author);
-			newAuthor.Save();
-			newAuthor.AddArticle(article);
+			Author existingAuthor = Author.Find(author);
+			if(existingAuthor != null){
+				existingAuthor.AddArticle(article);
+			}
+			else{
+				Author newAuthor = new Author(author);
+				newAuthor.Save();
+				newAuthor.AddArticle(article);
+			}
       return RedirectToAction("Show", new {articleID = article.GetID()});
     }
 
@@ -50,9 +56,15 @@ namespace Wackypedia.Controllers
     {
       Article article = Article.Find(artID);
       article.Edit(title);
-      Author au = new Author(author);
-			au.Save();
-			au.AddArticle(Article.Find(artID));
+			Author existingAuthor = Author.Find(author);
+			if(existingAuthor != null){
+				existingAuthor.AddArticle(article);
+			}
+			else{
+				Author newAuthor = new Author(author);
+				newAuthor.Save();
+				newAuthor.AddArticle(article);
+			}
       return RedirectToAction("Show", new {articleID = artID});
     }
 

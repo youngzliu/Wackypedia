@@ -16,7 +16,7 @@ miricaflorin@hotmail.com
 
 ## Description
 
-**_This wiki page allows the user to input articles. For each article, the author can add multiple sections to the article. The user can also delete articles and sections from the database._**
+**_This wiki page allows the user to input articles. For each article, the author can add multiple sections to the article, and edit the articles and sections. Which users have contributed to which articles are tracked, and you can view all of the articles an author has contributed to._**
 
 ## Specs
 
@@ -41,7 +41,7 @@ miricaflorin@hotmail.com
 
   - Example Output
     > New Article
-    - subject
+    - title
     - section 1
     - section 2  
 
@@ -74,18 +74,6 @@ miricaflorin@hotmail.com
       - section 1
       - section 2
 
-
-5. User can delete articles.
-
-    - Example Input
-
-      > Delete Article
-
-    - Example Output
-
-    > Article Deleted
-
-
 6. User can edit articles.
 
     - Example Input
@@ -109,7 +97,7 @@ miricaflorin@hotmail.com
     > Article
       - New section 1
 
-8. User can search for article by subject or author.
+8. User can search for article by title.
 
     - Example Input
 
@@ -122,6 +110,25 @@ miricaflorin@hotmail.com
       - 30 One-Sentence Stories From People Who Have Built Better Habits
       - 10 Habits Successful People Do
 
+9. User can see all the authors that have contributed to an article.
+
+    - Example Input
+
+    > Click on an article
+
+    - Example Output
+
+    > All authors are listed on the bottom of the page.
+
+10. User can see all the articles a user has contributed to.
+
+    - Example Input
+
+    > Click on an author
+
+    - Example Output
+
+    > All articles the author has contributed to will appear on the page.
 
 
 ## Setup/Installation Requirements
